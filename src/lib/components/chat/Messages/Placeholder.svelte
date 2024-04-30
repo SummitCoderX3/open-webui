@@ -21,7 +21,7 @@
 
 {#if models.length > 0}
 	<div class="m-auto text-center max-w-md px-2">
-		<div class="flex justify-center mt-8">
+		<div class="flex justify-center mt-8" style="display:none">
 			<div class="flex -space-x-4 mb-1">
 				{#each models as model, modelIdx}
 					<button
@@ -68,7 +68,7 @@
 			{:else}
 				<div class=" line-clamp-1">{$i18n.t('Hello, {{name}}', { name: $user.name })}</div>
 
-				<div>{$i18n.t('How can I help you today?')}</div>
+				<div>{$i18n.t('Welcome to EAA GPT')}</div>
 			{/if}
 		</div>
 	</div>

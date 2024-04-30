@@ -187,7 +187,7 @@ async def update_chat_by_id(
 
 @router.delete("/{id}", response_model=bool)
 async def delete_chat_by_id(request: Request, id: str, user=Depends(get_current_user)):
-
+    log.debug("deleting chat with id" + id)
     if user.role == "admin":
         result = Chats.delete_chat_by_id(id)
         return result

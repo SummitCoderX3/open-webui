@@ -78,6 +78,7 @@ type Settings = {
 	saveChatHistory?: boolean;
 	notificationEnabled?: boolean;
 	title?: TitleSettings;
+	online:boolean;
 
 	system?: string;
 	requestFormat?: string;
@@ -89,6 +90,7 @@ type Settings = {
 	top_p?: string;
 	num_ctx?: string;
 	options?: ModelOptions;
+	
 };
 
 type ModelOptions = {

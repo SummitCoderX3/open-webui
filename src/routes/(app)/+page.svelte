@@ -48,10 +48,8 @@
 	let processing = '';
 	let messagesContainerElement: HTMLDivElement;
 	let currentRequestId = null;
-
 	let showModelSelector = true;
-	let selectedModels = [''];
-
+	let selectedModels = ['llama3:latest'];
 	let selectedModelfile = null;
 	$: selectedModelfile =
 		selectedModels.length === 1 &&
@@ -156,11 +154,17 @@
 
 	const submitPrompt = async (userPrompt, _user = null) => {
 		console.log('submitPrompt', $chatId);
+		debugger;
 
-		selectedModels = selectedModels.map((modelId) =>
-			$models.map((m) => m.id).includes(modelId) ? modelId : ''
-		);
+		if(!$settings.online && userPrompt.toLowerCase().indexOf('#http')!= -1){
+			toast.error($i18n.t('You are in offline mode'));
+			return;
+		}
+		// selectedModels = selectedModels.map((modelId) =>
+		// 	$models.map((m) => m.id).includes(modelId) ? modelId : ''
+		// );
 
+		selectedModels = ["llama3:latest"]
 		if (selectedModels.includes('')) {
 			toast.error($i18n.t('Model not selected'));
 		} else if (messages.length != 0 && messages.at(-1).done != true) {

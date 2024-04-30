@@ -155,7 +155,7 @@
 		await chats.set(await getChatList(localStorage.token));
 	};
 </script>
-
+{#if $user?.role === 'admin'}
 <ShareChatModal bind:show={showShareChatModal} chatId={shareChatId} />
 <ArchivedChatsModal
 	bind:show={showArchivedChatsModal}
@@ -833,3 +833,4 @@
 		</Tooltip>
 	</div>
 </div>
+{/if}

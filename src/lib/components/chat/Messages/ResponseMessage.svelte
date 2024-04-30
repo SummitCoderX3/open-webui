@@ -136,22 +136,23 @@
 		let chatMessageElements = document
 			.getElementById(`message-${message.id}`)
 			?.getElementsByClassName('chat-assistant');
-
-		for (const element of chatMessageElements) {
-			auto_render(element, {
-				// customised options
-				// • auto-render specific keys, e.g.:
-				delimiters: [
-					{ left: '$$', right: '$$', display: false },
-					{ left: '$ ', right: ' $', display: false },
-					{ left: '\\(', right: '\\)', display: false },
-					{ left: '\\[', right: '\\]', display: false },
-					{ left: '[ ', right: ' ]', display: false }
-				],
-				// • rendering keys, e.g.:
-				throwOnError: false
-			});
-		}
+		if(chatMessageElements){
+			for (const element of chatMessageElements) {
+				auto_render(element, {
+					// customised options
+					// • auto-render specific keys, e.g.:
+					delimiters: [
+						{ left: '$$', right: '$$', display: false },
+						{ left: '$ ', right: ' $', display: false },
+						{ left: '\\(', right: '\\)', display: false },
+						{ left: '\\[', right: '\\]', display: false },
+						{ left: '[ ', right: ' ]', display: false }
+					],
+					// • rendering keys, e.g.:
+					throwOnError: false
+				});
+			}
+	}
 	};
 
 	const playAudio = (idx) => {
@@ -363,7 +364,7 @@
 				>
 					<div>
 						{#if edit === true}
-							<div class=" w-full">
+							<div class=" w-full mb-10">
 								<textarea
 									id="message-edit-{message.id}"
 									bind:this={editTextAreaElement}
@@ -396,7 +397,7 @@
 								</div>
 							</div>
 						{:else}
-							<div class="w-full">
+							<div class="w-full mb-10">
 								{#if message?.error === true}
 									<div
 										class="flex mt-2 mb-4 space-x-2 border px-4 py-3 border-red-800 bg-red-800/30 font-medium rounded-lg"
@@ -545,7 +546,7 @@
 											</button>
 										</Tooltip>
 
-										{#if !readOnly}
+										{#if !readOnly  && 1 == 2}
 											<Tooltip content="Good Response" placement="bottom">
 												<button
 													class="{isLastMessage
@@ -615,6 +616,49 @@
 												</button>
 											</Tooltip>
 										{/if}
+										<Tooltip content="Mail" placement="bottom">
+											<button
+												id="mail-button"
+												class="p-1 rounded dark:hover:text-white hover:text-black transition"
+												on:click={() => {
+													debugger;
+														// Regular expression to match subject and body
+															const regex = "/^Subject: (?<subject>.+?)\r?\n(?<body>.*)/s";
+
+															// Extract subject and body using the regular expression
+															const match = message.content.match(regex);
+															console.log(match)
+														if (match) {
+
+															let subject = match.groups.subject;
+  															let body = match.groups.body;
+															subject = encodeURIComponent(subject);
+														    body = encodeURIComponent(body);
+
+															// Construct the mailto link with subject and body
+															const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+
+															// Open the mailto link in the default email client
+															window.open(mailtoLink, '_blank');
+														} else {
+															
+															// Construct the mailto link with subject and body
+															const mailtoLink = `mailto:?subject=${""}&body=${message.content}`;
+
+															// Open the mailto link in the default email client
+															window.open(mailtoLink, '_blank');
+														}
+
+												}}
+											>
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+												<path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+												<path stroke-linecap="round" stroke-linejoin="round" d="M22 6l-10 7L2 6" />
+											  </svg>
+											  
+											</button>
+										</Tooltip>
+
 
 										<Tooltip content="Read Aloud" placement="bottom">
 											<button

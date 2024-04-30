@@ -11,7 +11,7 @@
 	const i18n = getContext('i18n');
 
 	export let selectedModels = [''];
-	export let disabled = false;
+	export let disabled = true;
 
 	const saveDefaultModel = async () => {
 		const hasEmptyModel = selectedModels.filter((it) => it === '');
@@ -29,15 +29,15 @@
 		toast.success($i18n.t('Default model updated'));
 	};
 
-	$: if (selectedModels.length > 0 && $models.length > 0) {
-		selectedModels = selectedModels.map((model) =>
-			$models.map((m) => m.id).includes(model) ? model : ''
-		);
+	$: if ($models.length > 0) {
+		
+		selectedModels = ['llama3:latest']
+		debugger;
 	}
 </script>
 
-<div class="flex flex-col mt-0.5 w-full">
-	{#each selectedModels as selectedModel, selectedModelIdx}
+<div class="flex flex-col mt-0.5 w-full" style="display:none">
+	{#each ($models.filter(m => m.name == "llama3:latest")) as selectedModel, selectedModelIdx}
 		<div class="flex w-full">
 			<div class="overflow-hidden w-full">
 				<div class="mr-0.5 max-w-full">
@@ -46,9 +46,9 @@
 						items={$models
 							.filter((model) => model.name !== 'hr')
 							.map((model) => ({
-								value: model.id,
-								label: model.name,
-								info: model
+								value: "llama3:latest",
+								label: "llama3:latest",
+								info: null
 							}))}
 						bind:value={selectedModel}
 					/>
@@ -106,6 +106,6 @@
 	{/each}
 </div>
 
-<div class="text-left mt-0.5 ml-1 text-[0.7rem] text-gray-500">
+<div class="text-left mt-0.5 ml-1 text-[0.7rem] text-gray-500" style="display:none">
 	<button on:click={saveDefaultModel}> {$i18n.t('Set as default')}</button>
 </div>

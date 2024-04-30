@@ -194,6 +194,8 @@
 <ShortcutsModal bind:show={showShortcuts} />
 
 <div class="app relative">
+	<div class="p-1 text-center text-white" style="background:#333333e6;"><p class="mb-0" style="">EAAGPT</p></div>
+	
 	<div
 		class=" text-gray-700 dark:text-gray-100 bg-white dark:bg-gray-900 min-h-screen overflow-auto flex flex-row"
 	>

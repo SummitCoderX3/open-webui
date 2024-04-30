@@ -20,7 +20,8 @@
 
 	export let saveSettings: Function;
 	// Chats
-	let saveChatHistory = true;
+	let saveChatHistory = false;
+	let online = true;
 	let importFiles;
 	let showDeleteConfirm = false;
 	let chatImportInputElement: HTMLInputElement;
@@ -96,7 +97,9 @@
 	onMount(async () => {
 		let settings = JSON.parse(localStorage.getItem('settings') ?? '{}');
 
-		saveChatHistory = settings.saveChatHistory ?? true;
+		//saveChatHistory = settings.saveChatHistory ?? true;
+		saveChatHistory = false;
+		online = true;
 	});
 </script>
 

@@ -56,7 +56,7 @@
 
 	// let chatId = $page.params.id;
 	let showModelSelector = true;
-	let selectedModels = [''];
+	let selectedModels = ['llama3:latest'];
 	let selectedModelfile = null;
 
 	$: selectedModelfile =

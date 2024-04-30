@@ -390,7 +390,7 @@
 	</div>
 {/if}
 
-<div class="w-full">
+<div class="w-full mb-10">
 	<div class="px-2.5 -mb-0.5 mx-auto inset-x-0 bg-transparent flex justify-center">
 		<div class="flex flex-col max-w-3xl w-full">
 			<div class="relative">
@@ -453,7 +453,7 @@
 					/>
 				{/if}
 
-				{#if messages.length == 0 && suggestionPrompts.length !== 0}
+				{#if messages.length == 0 && suggestionPrompts.length == 0}
 					<Suggestions {suggestionPrompts} {submitPrompt} />
 				{/if}
 			</div>
